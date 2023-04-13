@@ -3,13 +3,17 @@ let numberOfKilometres = AskAndCheckToUser("Quanti chilometri devi percorrere?",
 let ageOfPassenger = AskAndCheckToUser("Quanti anni hai?", true);
 let price = CalculatePrice(numberOfKilometres, priceForKilometer, ageOfPassenger);
 
-function AskAndCheckToUser(question) {
+function AskAndCheckToUser(question, isNumber) {
     let noError = false;
     let tmp;
     while (!noError) {
         tmp = prompt(question);
         if (!tmp)
             alert("Il valore inserito è vuoto!");
+        else if (isNumber && isNaN(tmp))
+            alert("Il valore inserito deve essere un numero!");
+        else if (isNumber && !isNaN(tmp) && parseInt(tmp) <= 0)
+            alert("Il valore inserito deve essere maggiore di 0!");
         else
             noError = true;
     }
